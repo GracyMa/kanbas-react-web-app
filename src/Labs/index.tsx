@@ -1,25 +1,33 @@
 import Lab1 from "./Lab1";
-import { Link } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router";
+import TOC from "./TOC";
+import Lab2 from "./Lab2";
+import Lab3 from "./Lab3";
 
 export default function Labs() {
   return (
-    <div id="wd-labs">
-      <h1>Tianyi Ma - Section 02</h1>
-      <Lab1 />
-      <ul>
-        <li><Link to="/Labs/Lab1">Lab 1</Link></li>
-        <li><Link to="/Labs/Lab2">Lab 2</Link></li>
-        <li><Link to="/Labs/Lab3">Lab 3</Link></li>
+    <div>
+      <h1>Labs</h1>
+      <TOC />
+      <Routes>
+      <Route path="/" element={<Navigate to="/Labs/Lab1" />} />
+        <Route path="/Lab1" element={<Lab1 />} />
+        <Route path="/Lab2" element={<Lab2 />} />
+        <Route path="/Lab3" element={<Lab3 />} />
+      </Routes>
 
-      </ul>
-      <a
-        href="https://github.com/GracyMa/kanbas-react-web-app"
-        id="wd-github"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub Repository
-      </a>
+      <div id="wd-labs">
+        <h2>Tianyi Ma - Section 02</h2>
+
+        <a
+          href="https://github.com/GracyMa/kanbas-react-web-app"
+          id="wd-github"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub Repository
+        </a>
+      </div>
     </div>
   );
 }
