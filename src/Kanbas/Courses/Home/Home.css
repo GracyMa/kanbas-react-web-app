@@ -1,0 +1,18 @@
+.course_status_btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.publish-btns button {
+    margin-right: 5px;
+}
+
+.course_other_btns button {
+    display: block;
+    text-align: left;
+}
+
+h2 {
+    font-family: "Times New Roman", Times, serif;
+}

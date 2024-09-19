@@ -1,11 +1,9 @@
 export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
-        {/* Assignment Name */}
         <h4>Assignment Name</h4>
         <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
   
-        {/* Assignment Description */}
         <textarea id="wd-description">
           The assignment is available online. Submit a link to the landing page of your Web application running on Netlify. 
           The landing page should include the following: 
@@ -17,9 +15,7 @@ export default function AssignmentEditor() {
         </textarea>
         <br />
   
-        {/* Assignment Editor Table */}
         <table>
-          {/* Points Row */}
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-points">Points</label>
@@ -28,23 +24,19 @@ export default function AssignmentEditor() {
               <input id="wd-points" type="number" value={100} />
             </td>
           </tr>
-  
-          {/* Assignment Group Row */}
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-group">Assignment Group</label>
             </td>
             <td>
               <select id="wd-group">
-                <option value="assignments">Assignments</option>
-                <option value="quizzes">Quizzes</option>
-                <option value="exams">Exams</option>
-                <option value="projects">Projects</option>
+                <option value="assignments">ASSIGNMENTS</option>
+                <option value="quizzes">QUIZZES</option>
+                <option value="exams">EXAMS</option>
+                <option value="projects">PROJECTS</option>
               </select>
             </td>
           </tr>
-  
-          {/* Display Grade As Row */}
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-display-grade-as">Display Grade As</label>
@@ -57,8 +49,6 @@ export default function AssignmentEditor() {
               </select>
             </td>
           </tr>
-  
-          {/* Submission Type Row */}
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-submission-type">Submission Type</label>
@@ -71,8 +61,6 @@ export default function AssignmentEditor() {
               </select>
             </td>
           </tr>
-  
-          {/* Online Entry Options Row */}
           <tr>
             <td align="right" valign="top">
               <label>Online Entry Options</label>
@@ -95,42 +83,46 @@ export default function AssignmentEditor() {
               </label>
             </td>
           </tr>
-  
-          {/* Due Date Row */}
           <tr>
             <td align="right" valign="top">
-              <label htmlFor="wd-due-date">Due Date</label>
+              <label htmlFor="wd-assign-to">Assign to</label>
+            </td>
+            <td>
+              <select id="wd-assign-to">
+                <option value="everyone">Everyone</option>
+                <option value="group-1">Group 1</option>
+                <option value="group-2">Group 2</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" valign="top">
+              <label htmlFor="wd-due-date">Due</label>
             </td>
             <td>
               <input id="wd-due-date" type="date" value="2024-05-13" />
             </td>
           </tr>
-  
-          {/* Available From Row */}
           <tr>
             <td align="right" valign="top">
               <label htmlFor="wd-available-from">Available From</label>
             </td>
             <td>
-              <input id="wd-available-from" type="date" value="2024-05-06" />
+              <input id="wd-available-from" type="date" value="2024-05-06" placeholder="mm/dd/yyyy" />
             </td>
           </tr>
-  
-          {/* Available Until Row */}
           <tr>
             <td align="right" valign="top">
-              <label htmlFor="wd-available-until">Available Until</label>
+              <label htmlFor="wd-available-until"> Until</label>
             </td>
             <td>
               <input id="wd-available-until" type="date" value="2024-05-20" />
             </td>
           </tr>
         </table>
-  
-        {/* Save and Cancel Buttons */}
-        <div style={{ marginTop: "20px", textAlign: "right" }}>
+        <div style={{ marginTop: "20px", textAlign: "right", borderTop: '1px solid black' }}>
           <button style={{ marginRight: "10px" }}>Cancel</button>
-          <button style={{ backgroundColor: "red", color: "white" }}>Save</button>
+          <button style={{ marginRight: "10px" }}>Save</button>
         </div>
       </div>
     );
