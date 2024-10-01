@@ -3,31 +3,36 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
+import PeopleTable from "./People/Table"; // Import the PeopleTable component
 import { Navigate, Route, Routes } from "react-router";
+import { FaAlignJustify } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+
 export default function Courses() {
+  const { cid } = useParams(); // Get the course ID from the URL params
+
   return (
     <div id="wd-courses">
-      <h2>Course 1234</h2>
+      <h2 className="text-danger">
+        <FaAlignJustify className="me-4 fs-4 mb-1" />
+        Course {cid} {/* Display the course ID dynamically */}
+      </h2>
       <hr />
-      <table>
-        <tr>
-          <td valign="top">
-            <CoursesNavigation />
-          </td>
-          <td valign="top">
-            <Routes>
-              <Route path="/" element={<Navigate to="Home" />} />
-              <Route path="Home" element={<Home />} />
-              <Route path="Modules" element={<Modules />} />
-              <Route path="Assignments" element={<Assignments />} />
-              <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-              <Route path="People" element={<h2>People</h2>} />
-            </Routes>
-          </td>
-        </tr>
-      </table>
+      <div className="d-flex">
+        <div className="d-none d-md-block">
+          <CoursesNavigation />
+        </div>
+        <div className="flex-fill">
+          <Routes>
+            <Route path="/" element={<Navigate to="Home" />} />
+            <Route path="Home" element={<Home />} />
+            <Route path="Modules" element={<Modules />} />
+            <Route path="Assignments" element={<Assignments />} />
+            <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+            <Route path="People" element={<PeopleTable />} /> {/* Route to PeopleTable */}
+          </Routes>
+        </div>
+      </div>
     </div>
-);}
-
-
-  
+  );
+}

@@ -1,0 +1,39 @@
+.wd-lesson {
+    border-left: 3px solid green; /* 左侧绿色边框 */
+    padding: 10px 15px; /* 控制内间距 */
+    margin-bottom: 5px; /* 控制项目间距 */
+  }
+  .wd-lesson h6 {
+    font-size: 1rem; /* 标题字体大小 */
+    font-weight: bold;
+  }
+  .wd-lesson small {
+    color: #6c757d; /* 次要文本的灰色 */
+  }
+  
+  /* 增加 Assignment 左侧的绿色边框 */
+.wd-lesson {
+    border-left: 3px solid green !important;
+  }
+  
+  /* 调整标题和文本间距 */
+  .wd-lesson .fw-bold {
+    font-weight: bold !important;
+  }
+  
+  .wd-lesson .text-danger {
+    color: red !important;
+  }
+  
+  .wd-lesson .text-muted {
+    color: gray !important;
+  }
+  .wd-assignment-link {
+    text-decoration: none; 
+    color: inherit; 
+  }
+  
+  .wd-assignment-link:hover {
+    text-decoration: none; 
+  }
+  

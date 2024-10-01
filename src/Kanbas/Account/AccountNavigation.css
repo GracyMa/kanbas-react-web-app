@@ -1,0 +1,21 @@
+.list-group-item {
+    padding: 10px 20px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .active-link {
+    position: relative;
+    color: Black !important; /* Change the text color to white when active */
+    background-color: transparent; /* Avoid background color changes */
+  }
+  
+  /* Add a vertical line to the left of the active link */
+  .active-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: black;
+  }
