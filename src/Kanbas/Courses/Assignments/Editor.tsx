@@ -1,8 +1,10 @@
+import "./Assignment.css";
+
 export default function AssignmentEditor() {
   return (
     <div id="wd-assignments-editor">
       <div className="mb-3 row">
-        <label htmlFor="wd-name" className="col-sm-2 col-form-label">
+        <label htmlFor="wd-name" className="col-sm-2 col-form-label text-end">
           Assignment Name
         </label>
         <div className="col-sm-10">
@@ -33,7 +35,7 @@ export default function AssignmentEditor() {
       </div>
 
       <div className="mb-3 row">
-        <label htmlFor="wd-points" className="col-sm-2 col-form-label">
+        <label htmlFor="wd-points" className="col-sm-2 col-form-label text-end">
           Points
         </label>
         <div className="col-sm-4">
@@ -60,7 +62,7 @@ export default function AssignmentEditor() {
       <div className="mb-3 row">
         <label
           htmlFor="wd-display-grade-as"
-          className="col-sm-2 col-form-label"
+          className="col-sm-2 col-form-label text-end"
         >
           Display Grade As
         </label>
@@ -74,7 +76,9 @@ export default function AssignmentEditor() {
       </div>
 
       <div className="mb-3 row">
-        <label className="col-sm-2 col-form-label">Submission Type</label>
+        <label className="col-sm-2 col-form-label text-end">
+          Submission Type
+        </label>
 
         <div className="col-sm-10">
           <div className="border p-3">
@@ -155,13 +159,13 @@ export default function AssignmentEditor() {
       </div>
 
       <div className="mb-3 row">
-        <label className="col-sm-2 col-form-label">Assign</label>
+        <label className="col-sm-2 col-form-label text-end">Assign</label>
         <div className="col-sm-10">
           <div className="border p-3">
             <h6>
               <strong>Assign To</strong>
             </h6>
-    
+
             <div className="mb-3">
               <select id="wd-assign-to" className="form-select">
                 <option value="everyone">Everyone</option>
@@ -169,21 +173,19 @@ export default function AssignmentEditor() {
                 <option value="group-2">Group 2</option>
               </select>
             </div>
-
+            <div className="mb-3">
+              <h6>
+                <strong>Due</strong>
+              </h6>
+              <input
+                id="wd-due-date"
+                type="date"
+                value="2024-05-13"
+                className="form-control"
+              />
+            </div>
             <div className="row">
-              <div className="col-md-4">
-                <h6>
-                  <strong>Due</strong>
-                </h6>
-                <input
-                  id="wd-due-date"
-                  type="date"
-                  value="2024-05-13"
-                  className="form-control"
-                />
-              </div>
-
-              <div className="col-md-4">
+              <div className="col-md-6">
                 <h6>
                   <strong>Available From</strong>
                 </h6>
@@ -195,7 +197,7 @@ export default function AssignmentEditor() {
                 />
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-6">
                 <h6>
                   <strong>Until</strong>
                 </h6>
@@ -210,7 +212,10 @@ export default function AssignmentEditor() {
           </div>
         </div>
       </div>
-      <div className="text-end mt-5" style={{borderTop: '1px solid #80808040' }}>
+      <div
+        className="text-end mt-5"
+        style={{ borderTop: "1px solid #80808040" }}
+      >
         <button className="btn btn-secondary me-2">Cancel</button>
         <button className="btn btn-danger">Save</button>
       </div>

@@ -36,4 +36,8 @@
   .wd-assignment-link:hover {
     text-decoration: none; 
   }
+  select option {
+    background-color: #f0f0f0; /* 灰色背景 */
+    color: #000; /* 黑色文字 */
+  }
   

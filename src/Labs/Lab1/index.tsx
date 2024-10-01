@@ -2,12 +2,12 @@ export default function Lab1() {
   return (
     <div id="wd-lab1">
       <h2>Lab 1</h2>
-      <h3>HTML Examples</h3>
+      <h4>HTML Examples</h4>
       <div id="wd-h-tag"> ... </div>
       <div id="wd-p-tag"> ... </div>
       <div id="wd-lists"> ... </div>
       <div id="wd-tables">
-        <h4>Table Tag</h4>
+        <h5>Table Tag</h5>
         <table border={1} width="100%">
           <thead>
             <tr>
@@ -47,5 +47,4 @@ export default function Lab1() {
       </div>
     </div>
 );}
-
 

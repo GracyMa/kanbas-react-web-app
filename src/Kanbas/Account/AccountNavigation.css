@@ -5,11 +5,10 @@
   
   .active-link {
     position: relative;
-    color: Black !important; /* Change the text color to white when active */
-    background-color: transparent; /* Avoid background color changes */
+    color: Black !important; 
+    background-color: transparent; 
   }
   
-  /* Add a vertical line to the left of the active link */
   .active-link::before {
     content: "";
     position: absolute;

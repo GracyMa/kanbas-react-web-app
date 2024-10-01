@@ -9,15 +9,8 @@ export default function Labs() {
     <div>
       <h1>Labs</h1>
       <TOC />
-      <Routes>
-      <Route path="/" element={<Navigate to="/Labs/Lab1" />} />
-        <Route path="/Lab1" element={<Lab1 />} />
-        <Route path="/Lab2" element={<Lab2 />} />
-        <Route path="/Lab3" element={<Lab3 />} />
-      </Routes>
-
       <div id="wd-labs">
-        <h2>Tianyi Ma - Section 02</h2>
+        <h3>Tianyi Ma - Section 02</h3>
 
         <a
           href="https://github.com/GracyMa/kanbas-react-web-app"
@@ -27,6 +20,14 @@ export default function Labs() {
         >
           GitHub Repository
         </a>
+      <Routes>
+      <Route path="/" element={<Navigate to="/Labs/Lab1" />} />
+        <Route path="/Lab1" element={<Lab1 />} />
+        <Route path="/Lab2" element={<Lab2 />} />
+        <Route path="/Lab3" element={<Lab3 />} />
+      </Routes>
+
+
       </div>
     </div>
   );

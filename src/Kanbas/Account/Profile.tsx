@@ -4,7 +4,6 @@ export default function Profile() {
     <div id="wd-profile-screen" className="container mt-5">
       <h3>Profile</h3>
       <form>
-        {/* Username */}
         <div className="mb-3">
           <input 
             id="wd-username" 
@@ -13,8 +12,6 @@ export default function Profile() {
             className="form-control"
           />
         </div>
-
-        {/* Password */}
         <div className="mb-3">
           <input 
             id="wd-password" 
@@ -25,7 +22,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* First Name */}
         <div className="mb-3">
           <input 
             id="wd-firstname" 
@@ -35,7 +31,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Last Name */}
         <div className="mb-3">
           <input 
             id="wd-lastname" 
@@ -45,7 +40,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Date of Birth */}
         <div className="mb-3">
           <input 
             id="wd-dob" 
@@ -55,7 +49,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Email */}
         <div className="mb-3">
           <input 
             id="wd-email" 
@@ -66,7 +59,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Role Selection */}
         <div className="mb-3">
           <select 
             id="wd-role" 
@@ -79,7 +71,6 @@ export default function Profile() {
           </select>
         </div>
 
-        {/* Sign out Link */}
         <Link 
           to="/Kanbas/Account/Signin" 
           className="btn btn-danger w-100"
