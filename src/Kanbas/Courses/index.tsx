@@ -3,19 +3,21 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
-import PeopleTable from "./People/Table"; // Import the PeopleTable component
-import { Navigate, Route, Routes } from "react-router";
+import PeopleTable from "./People/Table"; 
+import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { courses } from "../Database/index";
 
 export default function Courses() {
-  const { cid } = useParams(); // Get the course ID from the URL params
+  const { cid } = useParams();
+  const course = courses.find((course) => course._id === cid);
+  const { pathname } = useLocation();
 
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
-        Course {cid} {/* Display the course ID dynamically */}
+        {course && course.name} &gt; {pathname.split("/")[4]}
       </h2>
       <hr />
       <div className="d-flex">

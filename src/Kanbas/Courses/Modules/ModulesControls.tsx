@@ -23,56 +23,58 @@ export default function ModulesControls() {
         </button>
         <ul className="dropdown-menu">
           <li>
-            <a
+            <button
               id="wd-publish-all-modules-and-items-btn"
               className="dropdown-item"
-              href="#"
+              type="button"
             >
               <GreenCheckmark />
               Publish all modules and items
-            </a>
+            </button>
           </li>
           <li>
-            <a
+            <button
               id="wd-publish-modules-only-button"
               className="dropdown-item"
-              href="#"
+              type="button"
             >
               <GreenCheckmark />
               Publish modules only
-            </a>
+            </button>
           </li>
           <li>
-            <a
+            <button
               id="wd-unpublish-all-modules-and-items"
               className="dropdown-item"
-              href="#"
+              type="button"
             >
               <GreenCheckmark />
               Unpublish all modules and items
-            </a>
+            </button>
           </li>
           <li>
-            <a
+            <button
               id="wd-unpublish-modules-only"
               className="dropdown-item"
-              href="#"
+              type="button"
             >
               <GreenCheckmark />
               Unpublish modules only
-            </a>
+            </button>
           </li>
         </ul>
       </div>
       <button
         id="wd-view-progress"
         className="btn btn-lg btn-secondary me-1 float-end"
+        type="button"
       >
         View Progress
       </button>
       <button
         id="wd-collapse-all"
         className="btn btn-lg btn-secondary me-1 float-end"
+        type="button"
       >
         Collapse All
       </button>

@@ -19,6 +19,7 @@ export default function Labs() {
         >
           GitHub Repository
         </a>
+        <TOC />
         <Routes>
           <Route path="/" element={<Navigate to="/Labs/Lab1" />} />
           <Route path="/Lab1" element={<Lab1 />} />
@@ -26,14 +27,6 @@ export default function Labs() {
           <Route path="Lab3/*" element={<Lab3 />} />
         </Routes>
       </div>
-
-      <TOC />
-      <Routes>
-        <Route path="/" element={<Navigate to="/Labs/Lab1" />} />
-        <Route path="/Lab1" element={<Lab1 />} />
-        <Route path="/Lab2" element={<Lab2 />} />
-        <Route path="/Lab3" element={<Lab3 />} />
-      </Routes>
     </div>
   );
 }
