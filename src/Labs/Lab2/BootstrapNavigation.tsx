@@ -8,24 +8,24 @@ export default function BootstrapNavigation() {
       <h2>Tabs</h2>
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <a className="nav-link active" href="#">
+          <button className="nav-link active">
             Active
-          </a>
+          </button>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <button className="nav-link">
             Link
-          </a>
+          </button>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <button className="nav-link">
             Link
-          </a>
+          </button>
         </li>
         <li className="nav-item">
-          <a className="nav-link disabled" href="#">
+          <button className="nav-link disabled" disabled>
             Disabled
-          </a>
+          </button>
         </li>
       </ul>
 
@@ -39,9 +39,9 @@ export default function BootstrapNavigation() {
             <p className="card-text">
               Stacking the most powerful rocket in history. Mars or bust!
             </p>
-            <a href="#" className="btn btn-primary">
+            <button className="btn btn-primary">
               Boldly Go
-            </a>
+            </button>
           </div>
         </div>
       </div>
