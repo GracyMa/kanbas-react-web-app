@@ -1,176 +1,194 @@
-import { useParams, useNavigate } from "react-router-dom";
-import "./Assignment.css";
-import * as db from "../../Database"; // Import the entire database
+
+import { useLocation, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { addAssignment, updateAssignment } from "./reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function AssignmentEditor() {
-  const { cid, aid } = useParams(); // Get the course ID and assignment ID from URL params
-  const navigate = useNavigate();
 
-  // Find the assignment based on the course and assignment ID
-  const assignment = db.assignments.find(
-    (a) => a.course === cid && a._id === aid
-  );
+    const { cid, aid } = useParams();
+    const assignment = useSelector((state: any) =>
+        state.assignmentsReducer.assignments.find((x: any) => x._id === aid)
+    );
 
-  // Handle cases where assignment might not be found
-  if (!assignment) {
-    return <div>Assignment not found</div>;
-  }
+    const dispatch = useDispatch();
 
-  return (
-    <div id="wd-assignments-editor">
-      <div className="mb-3 row">
-        <label htmlFor="wd-name" className="col-sm-2 col-form-label text-end">
-          Assignment Name
-        </label>
-        <div className="col-sm-10">
-          <input
-            id="wd-name"
-            value={assignment.title}
-            className="form-control"
-            readOnly
-          />
+    const seg = useLocation().pathname.split('/');
+    const loc = seg[seg.length - 1];
+
+    const [assignmentName, setName] = useState(assignment ? assignment.title : "")
+    const [assignmentPoints, setPoints] = useState(100)
+    const [dueDate, setDueDate] = useState(assignment? assignment.due : "yyyy-mm-dd")
+    const [availability, setAvailability] = useState(assignment? assignment.available : "yyyy-mm-dd")
+
+    const addOrEdit = () => {
+
+        if (loc === "Editor") {
+            
+            const new_assignment = {
+                "_id": new Date().getTime().toString(), 
+                "title": assignmentName, 
+                "course": cid, 
+                "points": assignmentPoints,
+                "due": dueDate,
+                "available": availability
+            }
+
+            dispatch(addAssignment(new_assignment));
+        }
+        else {
+
+            const new_assignment = {
+                "_id": aid, 
+                "title": assignmentName, 
+                "course": cid, 
+                "points": assignmentPoints,
+                "due": dueDate,
+                "available": availability
+            }
+
+            dispatch(updateAssignment(new_assignment));
+
+        }
+    }
+
+    const nameChange = (e: any) => {
+        setName(e.target.value)
+    }
+
+    const pointsChange = (e: any) => {
+        setPoints(e.target.value)
+    }
+
+    const dueDateChange = (e: any) => {
+        setDueDate(e.target.value)
+    }
+
+    const availabilityDateChange = (e: any) => {
+        setAvailability(e.target.value)
+    }
+
+    return (
+      <div id="wd-assignments-editor">
+
+        <div className="d-flex flex-column mb-3">
+            <label htmlFor="wd-name">Assignment Name</label>
+            <input id="wd-name" value={assignmentName} className="form-control" onChange={(e) => nameChange(e)}/>
         </div>
-      </div>
 
-      <div className="mb-3 row">
-        <label htmlFor="wd-description" className="col-sm-2 col-form-label text-end">
-          Description
-        </label>
-        <div className="col-sm-10">
-          <textarea
-            id="wd-description"
-            className="form-control"
-            rows={4}
-            defaultValue="This is a placeholder description. You can replace it with assignment-specific details."
-          />
-        </div>
-      </div>
+        <textarea id="wd-description" className="form-control mb-3">
+          The assignment is available online. Submit a link to the landing page of your Web application running on Netflify.
+          The landing page should includ the following:
+          
+            - You full name and section.
+            - Links to each of the lab assignments.
+        </textarea>
+ 
+        <div className="d-flex flex-column">
 
-      <div className="mb-3 row">
-        <label htmlFor="wd-points" className="col-sm-2 col-form-label text-end">
-          Points
-        </label>
-        <div className="col-sm-4">
-          <input
-            id="wd-points"
-            type="number"
-            className="form-control"
-            defaultValue={100}
-          />
-        </div>
-        <label htmlFor="wd-group" className="col-sm-2 col-form-label text-end">
-          Assignment Group
-        </label>
-        <div className="col-sm-4">
-          <select id="wd-group" className="form-select">
-            <option value="assignments">ASSIGNMENTS</option>
-            <option value="quizzes">QUIZZES</option>
-            <option value="exams">EXAMS</option>
-            <option value="projects">PROJECTS</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="mb-3 row">
-        <label htmlFor="wd-display-grade-as" className="col-sm-2 col-form-label text-end">
-          Display Grade As
-        </label>
-        <div className="col-sm-10">
-          <select id="wd-display-grade-as" className="form-select">
-            <option value="percentage">Percentage</option>
-            <option value="points">Points</option>
-            <option value="letter-grade">Letter Grade</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="mb-3 row">
-        <label className="col-sm-2 col-form-label text-end">Submission Type</label>
-        <div className="col-sm-10">
-          <div className="border p-3">
-            <select id="wd-submission-type" className="form-select mb-3">
-              <option value="online">Online</option>
-              <option value="on-paper">On Paper</option>
-              <option value="no-submission">No Submission</option>
-            </select>
-            <fieldset>
-              <h6><strong>Online Entry Options</strong></h6>
-              <div className="form-check">
-                <input id="wd-text-entry" type="checkbox" className="form-check-input" />
-                <label htmlFor="wd-text-entry" className="form-check-label">Text Entry</label>
-              </div>
-              <div className="form-check">
-                <input id="wd-website-url" type="checkbox" className="form-check-input" defaultChecked />
-                <label htmlFor="wd-website-url" className="form-check-label">Website URL</label>
-              </div>
-              <div className="form-check">
-                <input id="wd-media-recordings" type="checkbox" className="form-check-input" />
-                <label htmlFor="wd-media-recordings" className="form-check-label">Media Recordings</label>
-              </div>
-              <div className="form-check">
-                <input id="wd-file-upload" type="checkbox" className="form-check-input" />
-                <label htmlFor="wd-file-upload" className="form-check-label">File Uploads</label>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-      </div>
-
-      <div className="mb-3 row">
-        <label className="col-sm-2 col-form-label text-end">Assign</label>
-        <div className="col-sm-10">
-          <div className="border p-3">
-            <h6><strong>Assign To</strong></h6>
-            <select id="wd-assign-to" className="form-select mb-3">
-              <option value="everyone">Everyone</option>
-              <option value="group-1">Group 1</option>
-              <option value="group-2">Group 2</option>
-            </select>
-            <h6><strong>Due</strong></h6>
-            <input
-              id="wd-due-date"
-              type="date"
-              className="form-control mb-3"
-              defaultValue="2024-05-13"
-            />
-            <div className="row">
-              <div className="col-md-6">
-                <h6><strong>Available From</strong></h6>
-                <input
-                  id="wd-available-from"
-                  type="date"
-                  className="form-control"
-                  defaultValue="2024-05-06"
-                />
-              </div>
-              <div className="col-md-6">
-                <h6><strong>Until</strong></h6>
-                <input
-                  id="wd-available-until"
-                  type="date"
-                  className="form-control"
-                  defaultValue="2024-05-20"
-                />
-              </div>
+            <div className="d-flex ms-auto mb-3 w-50">
+                <label htmlFor="wd-points" className="me-2">Points</label>
+                <input id="wd-points" className="form-control" value={assignmentPoints} onChange={(e) => pointsChange(e)} />
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="text-end mt-5" style={{ borderTop: "1px solid #80808040" }}>
-        <button
-          className="btn btn-secondary me-2"
-          onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}
-        >
-          Cancel
-        </button>
-        <button 
-        className="btn btn-danger" 
-        onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}>
-          Save
-        </button>
-      </div>
-      
+            <div className="d-flex ms-auto mb-3 w-50">
+                <label htmlFor="wd-group" className="me-2">Assignment Group</label>
+                <select id="wd-group" className="form-select">
+                    <option>ASSIGNMENTS</option>
+                    <option>QUIZZES</option>
+                    <option>EXAMS</option>
+                </select>
+            </div>
+
+            <div className="d-flex ms-auto mb-3 w-50">
+                <label htmlFor="wd-display-grade-as" className="me-2">Display Grade as</label>
+                <select id="wd-display-grade-as" className="form-select">
+                    <option>Percentage</option>
+                    <option>Whole Number</option>
+                    <option>Fractional Number</option>
+                </select>
+            </div>
+
+            <div className="d-flex">
+
+                <label htmlFor="wd-submission-type" className="ms-auto me-3">Submission Type</label>
+                <div id="wd-submission-type" className="d-flex flex-column border border-2 p-3 w-75 mb-3">
+                    
+                    <div className="d-flex mb-3">
+                        <select className="form-select">
+                            <option>Online</option>
+                            <option>Paper</option>
+                            <option>Mail</option>
+                        </select>
+                    </div>
+
+                    <label className="mb-3 fw-bold">Online Entry Options</label>
+                    <div className="d-flex mb-3">
+                        <input type="checkbox" name="check-genre" id="wd-text-entry" className="me-2"/>
+                        <label htmlFor="wd-text-entry">Text Entry</label>
+                    </div>
+
+                    <div className="d-flex mb-3">
+                        <input type="checkbox" name="check-genre" id="wd-website-url" className="me-2"/>
+                        <label htmlFor="wd-website-url">Website URL</label>
+                    </div>
+
+                    <div className="d-flex mb-3">
+                        <input type="checkbox" name="check-genre" id="wd-media-recordings" className="me-2"/>
+                        <label htmlFor="wd-media-recordings">Media Recordings</label>
+                    </div>
+
+
+                    <div className="d-flex mb-3">
+                        <input type="checkbox" name="check-genre" id="wd-student-annotation" className="me-2"/>
+                        <label htmlFor="wd-student-annotation">Student Annotation</label>
+                    </div>
+
+                    <div className="d-flex mb-3">
+                        <input type="checkbox" name="check-genre" id="wd-file-upload" className="me-2"/>
+                        <label htmlFor="wd-file-upload">File Uploads</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className="d-flex">
+
+                <label className="ms-auto me-3">Assign</label>
+                <div className="d-flex flex-column border border-2 p-3 w-75">
+
+                    <label htmlFor="wd-assign-to" className="fw-bold">Assign to</label>
+                    <input id="wd-assign-to" className="form-control mb-3" value="Everyone" />                
+
+                    <label htmlFor="wd-due-date">Due </label>
+                    <input id="wd-due-date" type="date" className="form-control mb-3" value={dueDate} onChange={(e) => dueDateChange(e)}/>
+
+                    <div className="d-flex">
+                    
+                        <div className="d-flex flex-column me-3">
+                            <label htmlFor="wd-available-form" className="mb-2">Available from </label>        
+                            <input id="wd-available-from" type="date" className="form-control me-3" value={availability} onChange={(e) => availabilityDateChange(e)}/>
+                        </div>
+
+                        <div className="d-flex flex-column me-3">
+                            <label htmlFor="wd-file-upload" className="mb-2">Until </label>
+                            <input id="wd-file-upload" type="date" className="form-control"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div className="ms-auto mt-3">
+                <Link to={`/Kanbas/Courses/${cid}/Assignments`} className="btn btn-secondary me-2">Cancel</Link>
+                <Link to={`/Kanbas/Courses/${cid}/Assignments`}>
+                    <button className="btn btn-danger me-2"
+                            onClick={addOrEdit}>Save</button>
+                </Link>
+            </div>
+        
+        </div>
+        
     </div>
-  );
-}
+);}
