@@ -17,6 +17,7 @@
 // }
 
 
+// 
 import React from 'react';
 import './App.css';
 import Labs from "./Labs";
@@ -28,14 +29,17 @@ import { Provider } from "react-redux";
 function App() {
   return (
     <HashRouter>
-      <Provider store = {store}>
-        <div>
-          <Routes>
-            <Route path="/" element={<Navigate to="Kanbas"/>} />
-            <Route path="/Labs/*" element={<Labs />} />
-            <Route path="/Kanbas/*" element={<Kanbas />} />
-          </Routes>
-        </div>
+      <Provider store={store}>
+        <Routes>
+          {/* Redirect "/" to "/Kanbas" */}
+          <Route path="/" element={<Navigate to="/Kanbas" />} />
+          
+          {/* Labs routes */}
+          <Route path="/Labs/*" element={<Labs />} />
+          
+          {/* Kanbas routes */}
+          <Route path="/Kanbas/*" element={<Kanbas />} />
+        </Routes>
       </Provider>
     </HashRouter>
   );
