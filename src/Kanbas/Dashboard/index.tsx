@@ -120,7 +120,7 @@ export default function Dashboard(
               <div className="card rounded-3 overflow-hidden">
                 { showEnrollment && <Link to={`/Kanbas/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark" >
-                  <img src={course.photo} width="100%" height={160} />
+                  <img src={course.photo} alt="" width="100%" height={160} />
                   <div className="card-body">
                     <h5 className="wd-dashboard-course-title card-title">
                       {course.name} </h5>
@@ -152,7 +152,7 @@ export default function Dashboard(
                 {
                   !showEnrollment && 
                   <div>
-                    <img src={course.photo} width="100%" height={160} />
+                    <img src={course.photo} alt={`Pic of ${course.name}`}  width="100%" height={160} />
                     <div className="card-body">
                       <h5 className="wd-dashboard-course-title card-title">
                         {course.name} </h5>
