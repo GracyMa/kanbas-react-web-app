@@ -1,5 +1,3 @@
-
-
 import Profile from "./Profile";
 import Signin from "./Signin";
 import { Routes, Route, Navigate } from "react-router";

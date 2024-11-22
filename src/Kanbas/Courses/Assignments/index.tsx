@@ -1,4 +1,3 @@
-
 import { BsGripVertical } from "react-icons/bs";
 import AssignmentsControls from "./AssignmentControls";
 import { PiNotebookDuotone } from "react-icons/pi";
@@ -8,52 +7,59 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "../Modules/GreenCheckmark";
 import { FaPencil, FaTrash } from "react-icons/fa6";
-import { deleteAssignment } from "./reducer";
+import { setAssignments, deleteAssignment } from "./reducer";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import * as assignmentClient from "./client";
+import { useEffect } from "react";
 
 export default function Assignments() {
+
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
 
-    // State to track the assignment being considered for deletion
-    const [assignmentToDelete, setAssignmentToDelete] = useState(null);
+    const fetchAssignments = async () => {
 
-    // Function to handle delete confirmation
-    const handleDelete = () => {
-        if (assignmentToDelete) {
-            dispatch(deleteAssignment(assignmentToDelete));
-            setAssignmentToDelete(null); // Reset after deletion
-        }
+      const assignments = await assignmentClient.fetchAssignmentsForCourse(cid as string);
+      dispatch(setAssignments(assignments));
+    }
+
+    const removeAssignment = async (_id: string) => {
+
+      await assignmentClient.deleteAssignment(_id);
+      dispatch(deleteAssignment(_id));
     };
 
-    // Function to cancel deletion
-    const cancelDelete = () => {
-        setAssignmentToDelete(null); // Reset without deleting
-    };
+    useEffect(() => {
+      fetchAssignments();
+    }, []);
 
     return (
       <div id="wd-assignments">
+
         <AssignmentsControls/><br/><br/><br/><br/>
         <ul id="wd-modules" className="list-group rounded-0">
           <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
             <div className="wd-title p-3 ps-2 bg-secondary">
               <BsGripVertical className="me-2 fs-3" />
-              Assignments
+                Assignments
+              
               <IoEllipsisVertical className="fs-4 float-end" />
             </div>
 
             <ul className="wd-lessons list-group rounded-0">
+            
               {
                 assignments
                 .filter((assignment : any) => assignment.course === cid)
-                .map((assignment: any) => (
-                    <li key={assignment._id} className="wd-lesson list-group-item p-3 ps-1">
+                .map(
+
+                  (assignment: any) => (
+                    <li className="wd-lesson list-group-item p-3 ps-1">
                       <div className="d-flex align-items-center">
                         <BsGripVertical className="me-2 fs-3" />
                         <PiNotebookDuotone className="text-success me-3 fs-3"/>
-                        <div className="d-flex flex-column">
+                        <div className = "d-flex flex-column">
                           <p className="fs-4">
                             <a className="wd-assignment-link text-dark text-decoration-none"
                             href={`#/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}>
@@ -66,37 +72,29 @@ export default function Assignments() {
                             | <span className="fw-bold">Due</span> {assignment.due} at 11:59pm | {assignment.points} pts</p>
                         </div>
                         <div className="ms-auto">
-                          <div className="float-end">
-                            <Protected>
-                              <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}>
-                                <FaPencil className="text-primary me-3" />
-                              </Link>
-                              <FaTrash
-                                className="text-danger me-2 mb-1"
-                                onClick={() => setAssignmentToDelete(assignment._id)}
-                              />
-                            </Protected>
-                            <GreenCheckmark />
-                            <IoEllipsisVertical className="fs-4" />
-                          </div>
+                        <div className="float-end">
+                          
+                          <Protected>
+                            <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}>
+                              <FaPencil className="text-primary me-3" />
+                            </Link>
+
+                            <FaTrash className="text-danger me-2 mb-1" onClick={() => removeAssignment(assignment._id)}/>
+                          </Protected>
+
+                          <GreenCheckmark />
+                          <IoEllipsisVertical className="fs-4" />
+                        </div>
                         </div>
                       </div>
                     </li>
                   )
                 )
               }
+
             </ul>
           </li>
         </ul>
 
-        {/* Confirmation Dialog */}
-        {assignmentToDelete && (
-          <div className="confirmation-dialog">
-            <p>Are you sure you want to delete this assignment?</p>
-            <button onClick={handleDelete}>Yes</button>
-            <button onClick={cancelDelete}>No</button>
-          </div>
-        )}
       </div>
-    );
-}
+  );}  
